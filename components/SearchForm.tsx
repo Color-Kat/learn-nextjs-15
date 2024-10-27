@@ -9,7 +9,7 @@ interface SearchFormProps {
 
 export const SearchForm: FC<SearchFormProps> = ({ query }) => {
     return <Form
-        action="/public"
+        action="/"
         scroll={false}
         className="search-form"
     >
