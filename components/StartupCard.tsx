@@ -5,6 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { describe } from "node:test";
 import { Button } from "@/components/ui/button";
+import { Author, Startup } from "@/sanity/types";
+
+export type StartupCardType = Omit<Startup, "author"> & {author?: Author};
 
 interface StartupCardProps {
     post: StartupCardType
@@ -75,7 +78,7 @@ export const StartupCard: FC<StartupCardProps> = ({ post }) => {
             </Link>
             
             <div className="flex-between gap-3 mt-5">
-                <Link href={`/?query=${category.toLowerCase()}`}>
+                <Link href={`/?query=${category?.toLowerCase()}`}>
                     <p className="text-16-medium">
                         {category}
                     </p>

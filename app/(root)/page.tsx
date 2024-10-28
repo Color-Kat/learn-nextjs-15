@@ -1,5 +1,7 @@
 import { SearchForm } from "@/components/SearchForm";
-import { StartupCard } from "@/components/StartupCard";
+import { StartupCard, StartupCardType } from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUP_QUERY } from "@/sanity/lib/query";
 
 export default async function Home({
     searchParams
@@ -8,18 +10,7 @@ export default async function Home({
 }) {
     const query = (await searchParams).query;
 
-    const posts = [
-        {
-            _createdAt : (new Date),
-            views      : 84,
-            author     : { _id: 1, name: 'Nechaev' },
-            _id        : 1,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            image      : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQohuChzLtc5PBJedDKu5YM84ASVSc4yQLTIg&s',
-            category   : 'Games',
-            title      : 'Give money for Atomic Heart'
-        }
-    ];
+    const posts = await client.fetch(STARTUP_QUERY);
 
     return (
         <>
@@ -60,7 +51,7 @@ export default async function Home({
                     }
                 </ul>
 
-            </section
+            </section>
         </>
     );
 }
