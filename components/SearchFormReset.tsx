@@ -19,7 +19,7 @@ export const SearchFormReset: FC<SearchFormResetProps> = ({}) => {
             type="reset"
             onClick={reset}
         >
-            <Link href="/public" className="search-btn text-white">
+            <Link href="/" className="search-btn text-white">
                 <X className="size-5" />
             </Link>
         </button>;
