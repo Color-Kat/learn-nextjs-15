@@ -9,7 +9,7 @@ export const Navbar: FC = async ({}) => {
     return (
         <div className="px-5 py-3 bg-white shadow-sm font-work-sans">
             <nav className="flex justify-between items-center">
-                <Link href="/public">
+                <Link href="/">
                     <Image
                         src="/logo.png"
                         alt="logo"
