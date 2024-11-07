@@ -8,9 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "@/components/ui/button";
 import { Send, SendIcon } from "lucide-react";
-import { fromSchema } from "@/lib/validation";
+import { formSchema } from "@/lib/validation";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { createPitch } from "@/lib/actions";
 
 interface StartupFormProps {
 
@@ -25,6 +26,7 @@ export const StartupForm: FC<StartupFormProps> = ({}) => {
     const [pitch, setPitch] = useState("");
 
     const handleFormSubmit = async (prev: any, formData: FormData) => {
+
         try {
             const formValues = {
                 title      : formData.get("title") as string,
@@ -34,13 +36,9 @@ export const StartupForm: FC<StartupFormProps> = ({}) => {
                 pitch      : pitch
             }
 
-            await fromSchema.parseAsync(formValues);
+            await formSchema.parseAsync(formValues);
 
-            console.log(formValues)
-
-
-            // const result = await createIdea(prevState, formData, pitch);
-            // console.log(result);
+            const result = await createPitch(prev, formData, pitch);
 
             if (result) {
                 toast({
@@ -48,7 +46,7 @@ export const StartupForm: FC<StartupFormProps> = ({}) => {
                     description: "Your startup pitch ahs been created successfully",
                 });
 
-                router.push(`/startup/${result.id}`);
+                router.push(`/startup/${result._id}`);
             }
 
             return result;
